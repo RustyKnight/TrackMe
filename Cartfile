@@ -1,0 +1,8 @@
+#github "RustyKnight/MBProgressHUD" == 2.3.0
+#github "RustyKnight/CBZSplashViewLib" == 2.3.11
+
+github "malcommac/SwiftLocation"
+github "RustyKnight/realm-cocoa" == 2.6.0
+github "RustyKnight/Hydra"
+
+github "DaveWoodCom/XCGLogger" ~> 5.0.1
