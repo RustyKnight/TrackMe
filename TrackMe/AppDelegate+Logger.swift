@@ -25,7 +25,7 @@ extension AppDelegate {
 		systemDestination.showDate = true
 		
 		// Add the destination to the logger
-		log.add(destination: systemDestination)
+		logger.add(destination: systemDestination)
 		
 //		// Create a file log destination
 //		let fileDestination = FileDestination(writeToFile: "/path/to/file", identifier: "advancedLogger.fileDestination")
@@ -47,6 +47,6 @@ extension AppDelegate {
 //		log.add(destination: fileDestination)
 		
 		// Add basic app info, version info etc, to the start of the logs
-		log.logAppDetails()
+		logger.logAppDetails()
 	}
 }

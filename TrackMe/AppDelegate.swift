@@ -9,7 +9,7 @@
 import UIKit
 import XCGLogger
 
-let log = XCGLogger(identifier: "advancedLogger", includeDefaultDestinations: false)
+let logger = XCGLogger(identifier: "advancedLogger", includeDefaultDestinations: false)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		configureLogger()
-		log.debug("Application did start")
+		logger.debug("Application did start")
 		return true
 	}
 

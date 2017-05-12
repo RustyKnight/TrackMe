@@ -27,6 +27,7 @@
 		12EADD001EC54AA100268FB9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12EADCFF1EC54AA100268FB9 /* MapKit.framework */; };
 		12EADD021EC54B1600268FB9 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12EADD011EC54B1600268FB9 /* ObjcExceptionBridging.framework */; };
 		12EADD031EC54B1600268FB9 /* ObjcExceptionBridging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 12EADD011EC54B1600268FB9 /* ObjcExceptionBridging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3ED4A4CC780DE0794C8ED606 /* CLLocationCoordinate2D+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED4AA18D503059EF55FF51F /* CLLocationCoordinate2D+Format.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		1270C6FF1EC5459F00D1B92C /* AppDelegate+Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Logger.swift"; sourceTree = "<group>"; };
 		12EADCFF1EC54AA100268FB9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		12EADD011EC54B1600268FB9 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/iOS/ObjcExceptionBridging.framework; sourceTree = "<group>"; };
+		3ED4AA18D503059EF55FF51F /* CLLocationCoordinate2D+Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Format.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				121257301EC53A50000F1E26 /* LaunchScreen.storyboard */,
 				1212572B1EC53A50000F1E26 /* Main.storyboard */,
 				121257291EC53A50000F1E26 /* ViewController.swift */,
+				3ED4AA18D503059EF55FF51F /* CLLocationCoordinate2D+Format.swift */,
 			);
 			path = TrackMe;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				1270C7001EC5459F00D1B92C /* AppDelegate+Logger.swift in Sources */,
 				1212572A1EC53A50000F1E26 /* ViewController.swift in Sources */,
 				121257281EC53A50000F1E26 /* AppDelegate.swift in Sources */,
+				3ED4A4CC780DE0794C8ED606 /* CLLocationCoordinate2D+Format.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

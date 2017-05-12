@@ -44,8 +44,13 @@
 		<string>MKDirectionsModeTaxi</string>
 		<string>MKDirectionsModeTrain</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Keep an eye on you</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Keep an eye on you</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>fetch</string>
 		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
