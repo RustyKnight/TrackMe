@@ -28,6 +28,9 @@
 		12EADD021EC54B1600268FB9 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12EADD011EC54B1600268FB9 /* ObjcExceptionBridging.framework */; };
 		12EADD031EC54B1600268FB9 /* ObjcExceptionBridging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 12EADD011EC54B1600268FB9 /* ObjcExceptionBridging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ED4A4CC780DE0794C8ED606 /* CLLocationCoordinate2D+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED4AA18D503059EF55FF51F /* CLLocationCoordinate2D+Format.swift */; };
+		5A68204145C839BD58C34044 /* TrackMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A682ADAE9FB4C763E44AD87 /* TrackMe.swift */; };
+		5A68237176ADCB475C8949E9 /* CompassLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6820F527E73F4510C4DE05 /* CompassLayer.swift */; };
+		5A6828A70EAE5BB1163C4B95 /* Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A682EBB87D4FE75908ACD6D /* Numbers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +82,9 @@
 		12EADCFF1EC54AA100268FB9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		12EADD011EC54B1600268FB9 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/iOS/ObjcExceptionBridging.framework; sourceTree = "<group>"; };
 		3ED4AA18D503059EF55FF51F /* CLLocationCoordinate2D+Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Format.swift"; sourceTree = "<group>"; };
+		5A6820F527E73F4510C4DE05 /* CompassLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompassLayer.swift; sourceTree = "<group>"; };
+		5A682ADAE9FB4C763E44AD87 /* TrackMe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackMe.swift; path = StyleKit/TrackMe.swift; sourceTree = "<group>"; };
+		5A682EBB87D4FE75908ACD6D /* Numbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Numbers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,9 @@
 				1212572B1EC53A50000F1E26 /* Main.storyboard */,
 				121257291EC53A50000F1E26 /* ViewController.swift */,
 				3ED4AA18D503059EF55FF51F /* CLLocationCoordinate2D+Format.swift */,
+				5A6828E4253B8E089DDF8D0B /* StyleKit */,
+				5A682395D0FF9A61EB70E0A0 /* Layer */,
+				5A68252B0C85845C984D868E /* Extensions */,
 			);
 			path = TrackMe;
 			sourceTree = "<group>";
@@ -161,6 +170,30 @@
 				1212574A1EC53C6F000F1E26 /* SwiftLocation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5A682395D0FF9A61EB70E0A0 /* Layer */ = {
+			isa = PBXGroup;
+			children = (
+				5A6820F527E73F4510C4DE05 /* CompassLayer.swift */,
+			);
+			path = Layer;
+			sourceTree = "<group>";
+		};
+		5A68252B0C85845C984D868E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5A682EBB87D4FE75908ACD6D /* Numbers.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5A6828E4253B8E089DDF8D0B /* StyleKit */ = {
+			isa = PBXGroup;
+			children = (
+				5A682ADAE9FB4C763E44AD87 /* TrackMe.swift */,
+			);
+			name = StyleKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,6 +314,9 @@
 				1212572A1EC53A50000F1E26 /* ViewController.swift in Sources */,
 				121257281EC53A50000F1E26 /* AppDelegate.swift in Sources */,
 				3ED4A4CC780DE0794C8ED606 /* CLLocationCoordinate2D+Format.swift in Sources */,
+				5A68204145C839BD58C34044 /* TrackMe.swift in Sources */,
+				5A68237176ADCB475C8949E9 /* CompassLayer.swift in Sources */,
+				5A6828A70EAE5BB1163C4B95 /* Numbers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

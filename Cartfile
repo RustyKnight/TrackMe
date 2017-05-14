@@ -6,3 +6,6 @@ github "RustyKnight/realm-cocoa" == 2.6.0
 github "RustyKnight/Hydra"
 
 github "DaveWoodCom/XCGLogger" ~> 5.0.1
+
+#github "RustyKnight/KZCoreUILibrary"
+#github "RustyKnight/KZCoreLibrary"

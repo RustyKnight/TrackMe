@@ -21,9 +21,13 @@ class ViewController: UIViewController {
 
 	@IBOutlet weak var latitudeLabel: UILabel!
 	@IBOutlet weak var longitudeLabel: UILabel!
+	
+	let compassLayer: CompassLayer = CompassLayer()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		view.layer.addSublayer(compassLayer)
 
 		let requestSuccess: LocObserver.onSuccess = { request, location in
 			self.update(location)
@@ -70,7 +74,12 @@ class ViewController: UIViewController {
 //			logger.error("Cannot start heading updates: \(error)")
 //		}
 	}
-
+	
+	open override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		compassLayer.frame = view.bounds
+	}
+	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
