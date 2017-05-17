@@ -20,6 +20,7 @@ class CompassLayer: CALayer {
 	
 	func configure() {
 		needsDisplayOnBoundsChange = true
+		isOpaque = false
 	}
 	
 //	/*
@@ -69,26 +70,30 @@ class CompassLayer: CALayer {
 	when the slice changes its inscribed angle.
 	*/
 	override func draw(in ctx: CGContext) {
+		defer {
+			UIGraphicsPopContext()
+			ctx.restoreGState()
+		}
+		ctx.saveGState()
+		UIGraphicsPushContext(ctx)
+		
 		let viewableBounds: CGRect = bounds
 		let center = CGPoint(x: viewableBounds.width / 2, y: viewableBounds.height / 2)
 		
-		ctx.saveGState()
 		
 		// The intention here is to rotate the context to the "start angle" position
-		ctx.translateBy(x: center.x, y: center.y)
-		ctx.rotate(by: -90.0.toRadians.toCGFloat)
-		
-		// But we need to reset the origin
-		ctx.translateBy(x: -center.x, y: -center.y)
+//		ctx.translateBy(x: center.x, y: center.y)
+//		ctx.rotate(by: -90.0.toRadians.toCGFloat)
+//
+//		// But we need to reset the origin
+//		ctx.translateBy(x: -center.x, y: -center.y)
 		
 		let size = min(viewableBounds.width, viewableBounds.height)
 		let x = (viewableBounds.width - size) / 2
 		let y = (viewableBounds.height - size) / 2
 		let compassBounds = CGRect(x: x, y: y, width: size, height: size)
+		logger.debug(compassBounds)
 		TrackMe.drawCompass(frame: compassBounds)
-
-//		CGContextRestoreGState(ctx)
-		ctx.restoreGState()
 		
 	}
 	

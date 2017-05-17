@@ -45,11 +45,11 @@ public extension Double {
 
 public extension CGFloat {
 	public var toRadians : CGFloat {
-		return CGFloat(self) * CGFloat(M_PI) / 180.0
+		return CGFloat(self) * CGFloat(Double.pi) / 180.0
 	}
 	
 	public var toDegrees: CGFloat {
-		return self * 180.0 / CGFloat(M_PI)
+		return self * 180.0 / CGFloat(Double.pi)
 	}
 	
 	public var toDouble: Double {
