@@ -37,14 +37,16 @@ class ViewController: UIViewController {
 	@IBOutlet weak var latitudeLabel: UILabel!
 	@IBOutlet weak var longitudeLabel: UILabel!
 	
+	@IBOutlet weak var compassView: CompassView!
+	
 	let compassLayer: CompassLayer = CompassLayer()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		view.layer.addSublayer(compassLayer)
+//		view.layer.addSublayer(compassLayer)
 		
-		var preferenceOrder: [Accuracy] = [
+		let preferenceOrder: [Accuracy] = [
 			.any,
 //			.city,
 //			.neighborhood,
@@ -61,7 +63,7 @@ class ViewController: UIViewController {
 		}
 		
 		for accuracy in preferenceOrder {
-			var request = Location.getLocation(
+			let request = Location.getLocation(
 					accuracy: accuracy,
 					frequency: .continuous,
 					success: requestSuccess,
@@ -69,22 +71,24 @@ class ViewController: UIViewController {
 			request.name = accuracy.description
 		}
 
-//		do {
-//			try Location.getContinousHeading(filter: 0.2, success: { heading in
-//				logger.debug("New heading value \(heading)")
-//			}) { error in
-//				logger.error("Failed to update heading \(error)")
-//			}
-//		} catch {
-//			logger.error("Cannot start heading updates: \(error)")
-//		}
-		
-		Location.getContinousHeading(filter: 0.2, cancelOnError: true, success: { request, heading in
-			
-		}, failure: { request, error in
-			request.cancel()
-			logger.error(error)
-		})
+		do {
+			try Location.getContinousHeading(filter: 0.2, success: { heading in
+				logger.debug("New heading value \(heading)")
+				self.compassView.updateCompass(heading: heading.1)
+			}) { error in
+				logger.error("Failed to update heading \(error)")
+			}
+		} catch {
+			logger.error("Cannot start heading updates: \(error)")
+		}
+	}
+
+	func updateCompass(heading: CLHeading) {
+		let radians = heading.magneticHeading.toRadians
+		let animation = CABasicAnimation(keyPath: "transform.rotation")
+		animation.toValue = radians
+		animation.duration = 0.5
+		compassLayer.add(animation, forKey: nil)
 	}
 	
 	open override func viewDidLayoutSubviews() {
