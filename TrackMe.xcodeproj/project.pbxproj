@@ -24,6 +24,7 @@
 		1270C6FC1EC5453B00D1B92C /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1270C6FB1EC5453B00D1B92C /* XCGLogger.framework */; };
 		1270C6FD1EC5453B00D1B92C /* XCGLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1270C6FB1EC5453B00D1B92C /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1270C7001EC5459F00D1B92C /* AppDelegate+Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1270C6FF1EC5459F00D1B92C /* AppDelegate+Logger.swift */; };
+		12C7B1741ED50BFC006F7264 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7B1731ED50BFC006F7264 /* CompassView.swift */; };
 		12EADD001EC54AA100268FB9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12EADCFF1EC54AA100268FB9 /* MapKit.framework */; };
 		12EADD021EC54B1600268FB9 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12EADD011EC54B1600268FB9 /* ObjcExceptionBridging.framework */; };
 		12EADD031EC54B1600268FB9 /* ObjcExceptionBridging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 12EADD011EC54B1600268FB9 /* ObjcExceptionBridging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -79,6 +80,7 @@
 		1212574A1EC53C6F000F1E26 /* SwiftLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftLocation.framework; path = Carthage/Build/iOS/SwiftLocation.framework; sourceTree = "<group>"; };
 		1270C6FB1EC5453B00D1B92C /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/iOS/XCGLogger.framework; sourceTree = "<group>"; };
 		1270C6FF1EC5459F00D1B92C /* AppDelegate+Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Logger.swift"; sourceTree = "<group>"; };
+		12C7B1731ED50BFC006F7264 /* CompassView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompassView.swift; path = View/CompassView.swift; sourceTree = "<group>"; };
 		12EADCFF1EC54AA100268FB9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		12EADD011EC54B1600268FB9 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/iOS/ObjcExceptionBridging.framework; sourceTree = "<group>"; };
 		3ED4AA18D503059EF55FF51F /* CLLocationCoordinate2D+Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Format.swift"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		121257261EC53A50000F1E26 /* TrackMe */ = {
 			isa = PBXGroup;
 			children = (
+				12C7B1721ED50BDF006F7264 /* View */,
 				121257271EC53A50000F1E26 /* AppDelegate.swift */,
 				1270C6FF1EC5459F00D1B92C /* AppDelegate+Logger.swift */,
 				1212572E1EC53A50000F1E26 /* Assets.xcassets */,
@@ -170,6 +173,14 @@
 				1212574A1EC53C6F000F1E26 /* SwiftLocation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		12C7B1721ED50BDF006F7264 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				12C7B1731ED50BFC006F7264 /* CompassView.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		5A682395D0FF9A61EB70E0A0 /* Layer */ = {
@@ -247,7 +258,7 @@
 				TargetAttributes = {
 					121257231EC53A50000F1E26 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 28ZY5273WP;
+						DevelopmentTeam = YWXH886EY3;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -315,6 +326,7 @@
 				121257281EC53A50000F1E26 /* AppDelegate.swift in Sources */,
 				3ED4A4CC780DE0794C8ED606 /* CLLocationCoordinate2D+Format.swift in Sources */,
 				5A68204145C839BD58C34044 /* TrackMe.swift in Sources */,
+				12C7B1741ED50BFC006F7264 /* CompassView.swift in Sources */,
 				5A68237176ADCB475C8949E9 /* CompassLayer.swift in Sources */,
 				5A6828A70EAE5BB1163C4B95 /* Numbers.swift in Sources */,
 			);
@@ -458,7 +470,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 28ZY5273WP;
+				DEVELOPMENT_TEAM = YWXH886EY3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -477,7 +489,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 28ZY5273WP;
+				DEVELOPMENT_TEAM = YWXH886EY3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

@@ -6,8 +6,7 @@
 import UIKit
 
 class CompassLayer: CALayer {
-	
-	
+
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		configure()
