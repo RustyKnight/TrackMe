@@ -80,7 +80,7 @@ class ViewController: UIViewController {
 //		}
 		
 		Location.getContinousHeading(filter: 0.2, cancelOnError: true, success: { request, heading in
-			
+		
 		}, failure: { request, error in
 			request.cancel()
 			logger.error(error)

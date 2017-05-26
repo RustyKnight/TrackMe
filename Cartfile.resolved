@@ -1,6 +1,4 @@
 github "DaveWoodCom/XCGLogger" "5.0.1"
 github "RustyKnight/Hydra" "0.9.5"
-github "RustyKnight/KZCoreLibrary" "v0.1.0"
-github "RustyKnight/KZCoreUILibrary" "v0.1.0"
 github "RustyKnight/realm-cocoa" "v2.6.0"
 github "malcommac/SwiftLocation" "2.0.7"
