@@ -14,8 +14,14 @@ class CompassView: UIView {
 	var headingAccuracy: Double = 0.0
 	var locationAccuracy: Double = 1.0
 	
-	
 	var colorBand: ColorBand!
+	
+	var fromColor: UIColor!
+	var toColor: UIColor!
+	var fillColor: UIColor!
+	
+	var timer: Timer?
+	var startTime: Date?
 	
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -28,17 +34,64 @@ class CompassView: UIView {
 	}
 	
 	func configure() {
+		isOpaque = false
 		var builder = ColorBandBuilder()
 		builder.add(color: UIColor.green.darken(by: 0.25).withAlphaOf(0.5), at: 0.0)
 		builder.add(color: UIColor.green.darken(by: 0.25).withAlphaOf(0.5), at: 0.25)
 		builder.add(color: UIColor.yellow.darken(by: 0.25).withAlphaOf(0.5), at: 0.5)
 		builder.add(color: UIColor.red.darken(by: 0.25).withAlphaOf(0.5), at: 1.0)
 		colorBand = builder.build()
+		fillColor = colorBand.colorAt(1.0)
+		fromColor = fillColor
+		toColor = fillColor
+		
+		backgroundColor = nil
 	}
 	
 	func update(location: CLLocation) {
 		let accuracy = min(location.horizontalAccuracy, 20.0)
+		let lastAccuracy = locationAccuracy
 		locationAccuracy = accuracy / 20.0
+		guard lastAccuracy != locationAccuracy else {
+			return
+		}
+		fromColor = fillColor
+		toColor = colorBand.colorAt(locationAccuracy)
+		logger.debug("locationAccuracy = \(locationAccuracy)")
+		stopTimer()
+		startTime = Date()
+		timer = Timer(
+				timeInterval: 0.1,
+				target: self,
+				selector: #selector(fadeColor),
+				userInfo: nil, repeats: true)
+		RunLoop.main.add(timer!, forMode: .commonModes)
+	}
+	
+	func stopTimer() {
+		guard let timer = timer else {
+			return
+		}
+		startTime = nil
+		timer.invalidate()
+		self.timer = timer
+	}
+	
+	func fadeColor(_ sender: Timer) {
+		guard let startTime = startTime else {
+			stopTimer();
+			return
+		}
+		guard let fromColor = fromColor, let toColor = toColor else {
+			stopTimer()
+			return
+		}
+		let duration = Date().timeIntervalSince(startTime)
+		let progress = min(1.0, duration / 1.0)
+		if progress >= 1.0 {
+			stopTimer()
+		}
+		fillColor = UIColor.blend(fromColor, with: toColor, by: progress)
 		setNeedsDisplay()
 	}
 	
@@ -92,8 +145,6 @@ class CompassView: UIView {
 		ctx.setStrokeColor(UIColor.red.cgColor)
 		ctx.setLineWidth(3.0)
 		ctx.drawPath(using: .stroke)
-
-		let fillColor = colorBand.colorAt(locationAccuracy)
 
 		let x = (viewableBounds.width - size) / 2
 		let y = (viewableBounds.height - size) / 2
