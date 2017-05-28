@@ -27,14 +27,10 @@ extension Accuracy {
 }
 
 class ViewController: UIViewController {
-	@IBOutlet weak var magneticHeading: UILabel!
 	@IBOutlet weak var trueHeading: UILabel!
-	@IBOutlet weak var headingAccuracy: UILabel!
 	
 	@IBOutlet weak var courseLabel: UILabel!
 	@IBOutlet weak var speedLabel: UILabel!
-	@IBOutlet weak var vAccuracyLabel: UILabel!
-	@IBOutlet weak var hAccuracyLabel: UILabel!
 	@IBOutlet weak var altitudeLabel: UILabel!
 	
 	@IBOutlet weak var latitudeLabel: UILabel!
@@ -42,23 +38,24 @@ class ViewController: UIViewController {
 	
 	@IBOutlet weak var compassView: CompassView!
 	
-//	let compassLayer: CompassLayer = CompassLayer()
+	let numberFormatter = NumberFormatter()
+	let measurementFormatter = MeasurementFormatter()
+	
+	var headingRequest: HeadingRequest?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-//		view.layer.addSublayer(compassLayer)
+		monitorHeading = true
 		
 		let preferenceOrder: [Accuracy] = [
 			.any,
-//			.city,
-//			.neighborhood,
-//			.block,
 			.navigation
 		]
 		
 		let requestSuccess: LocObserver.onSuccess = { request, location in
 			self.update(location)
+			self.compassView.update(location: location)
 		}
 		let requestFail: LocObserver.onError = { request, location, error in
 			request.cancel()
@@ -75,43 +72,71 @@ class ViewController: UIViewController {
 					error: requestFail)
 			request.name = accuracy.description
 		}
-
-		do {
-			try Location.getContinousHeading(filter: 0.2, success: { result in
-				let heading = result.1
-				if heading.headingAccuracy > 5.0 {
-					Location.displayHeadingCalibration = true
-				} else {
-					Location.displayHeadingCalibration = false
-				}
-				self.compassView.updateCompass(heading: heading)
-				self.magneticHeading.text = "Magnetic Heading = \(heading.magneticHeading)"
-				self.trueHeading.text = "True Heading = \(heading.trueHeading)"
-				self.headingAccuracy.text = "Heading Accuracy = \(heading.headingAccuracy)"
-			}) { error in
-				logger.error("Failed to update heading \(error)")
-			}
-		} catch {
-			logger.error("Cannot start heading updates: \(error)")
-		}
+		
+		NotificationCenter.default.addObserver(
+				self,
+				selector: #selector(willEnterForeground),
+				name: NSNotification.Name.UIApplicationWillEnterForeground,
+				object: nil)
+		NotificationCenter.default.addObserver(
+				self,
+				selector: #selector(didEnterBackground),
+				name: NSNotification.Name.UIApplicationDidEnterBackground,
+				object: nil)
 	}
-//
-//	func updateCompass(heading: CLHeading) {
-//		let radians = (heading.magneticHeading).toRadians
-//		let animation = CABasicAnimation(keyPath: "transform.rotation")
-//		animation.toValue = radians
-//		animation.duration = 0.5
-//		compassLayer.add(animation, forKey: nil)
-//	}
-	
-//	open override func viewDidLayoutSubviews() {
-//		super.viewDidLayoutSubviews()
-//		compassLayer.frame = view.bounds
-//	}
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
+	}
+	
+	func willEnterForeground(_ notification: NSNotification) {
+		logger.debug("In the foreground")
+		monitorHeading = true
+	}
+	
+	func didEnterBackground(_ notification: NSNotification) {
+		logger.debug("In the background")
+		monitorHeading = false
+	}
+	
+	var monitorHeading: Bool = true {
+		didSet {
+			if monitorHeading {
+				do {
+					headingRequest = try Location.getContinousHeading(filter: 0.2, success: { result in
+						let heading = result.1
+						if heading.headingAccuracy > 5.0 {
+							Location.displayHeadingCalibration = true
+						} else {
+							Location.displayHeadingCalibration = false
+						}
+						self.compassView.updateCompass(heading: heading)
+						self.trueHeading.text = "True Heading = \(self.format(double: abs(heading.trueHeading)))°"
+					}) { error in
+						logger.error("Failed to update heading \(error)")
+					}
+				} catch {
+					logger.error("Cannot start heading updates: \(error)")
+				}
+			} else {
+				guard let headingRequest = headingRequest else {
+					return
+				}
+				headingRequest.cancel()
+				self.headingRequest = nil
+			}
+		}
+	}
+
+	func format(double number: Double) -> String {
+		return format(NSNumber(value: number))
+	}
+	
+	func format(_ number: NSNumber) -> String {
+		guard let text = self.numberFormatter.string(from: number) else {
+			return "\(number)"
+		}
+		return text
 	}
 	
 	func update(_ location: CLLocation) {
@@ -127,21 +152,17 @@ class ViewController: UIViewController {
 		latitudeLabel.text = "Lat = \(coordinate.latitudeDegreeDescription)"
 		longitudeLabel.text = "Lon = \(coordinate.longitudeDegreeDescription)"
 		
-		let formatter = MeasurementFormatter()
-		
 		let altitudeMeasurement = Measurement(value: altitude, unit: UnitLength.meters);
 		let hAccuracyMeasurement = Measurement(value: hAccuracy, unit: UnitLength.meters);
 		let vAccuracyMeasurement = Measurement(value: vAccuracy, unit: UnitLength.meters);
 		let speedMeasurement = Measurement(value: speed, unit: UnitSpeed.metersPerSecond);
 		
-		formatter.unitOptions = .naturalScale
-		formatter.unitStyle = .short
+		measurementFormatter.unitOptions = .naturalScale
+		measurementFormatter.unitStyle = .short
 		
-		altitudeLabel.text = "Altitude = \(formatter.string(from: altitudeMeasurement))"
-		hAccuracyLabel.text = "H. Accuracy = \(formatter.string(from: hAccuracyMeasurement))"
-		vAccuracyLabel.text = "V. Accuracy= \(formatter.string(from: vAccuracyMeasurement))"
-		speedLabel.text = "Speed = \(formatter.string(from: speedMeasurement))"
-		courseLabel.text = "Course \(abs(course))°"
+		altitudeLabel.text = "Altitude = \(measurementFormatter.string(from: altitudeMeasurement))"
+		speedLabel.text = "Speed = \(measurementFormatter.string(from: speedMeasurement))"
+		courseLabel.text = "Course \(format(double: abs(course)))°"
 	}
 	
 	

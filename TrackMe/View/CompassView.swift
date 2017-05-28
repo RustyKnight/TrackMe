@@ -11,7 +11,11 @@ import MapKit
 
 class CompassView: UIView {
 	
-	var accuracy: Double = 0.0
+	var headingAccuracy: Double = 0.0
+	var locationAccuracy: Double = 1.0
+	
+	
+	var colorBand: ColorBand!
 	
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -24,12 +28,24 @@ class CompassView: UIView {
 	}
 	
 	func configure() {
+		var builder = ColorBandBuilder()
+		builder.add(color: UIColor.green.darken(by: 0.25).withAlphaOf(0.5), at: 0.0)
+		builder.add(color: UIColor.green.darken(by: 0.25).withAlphaOf(0.5), at: 0.25)
+		builder.add(color: UIColor.yellow.darken(by: 0.25).withAlphaOf(0.5), at: 0.5)
+		builder.add(color: UIColor.red.darken(by: 0.25).withAlphaOf(0.5), at: 1.0)
+		colorBand = builder.build()
+	}
+	
+	func update(location: CLLocation) {
+		let accuracy = min(location.horizontalAccuracy, 20.0)
+		locationAccuracy = accuracy / 20.0
+		setNeedsDisplay()
 	}
 	
 	func updateCompass(heading: CLHeading) {
 		let direction = -heading.trueHeading
 		let radians = direction.toRadians// + delta.toRadians
-		accuracy = heading.headingAccuracy
+		headingAccuracy = heading.headingAccuracy
 		UIView.animate(withDuration: 0.5) {
 			self.transform = CGAffineTransform(rotationAngle: radians.toCGFloat)
 		}
@@ -50,7 +66,7 @@ class CompassView: UIView {
 		UIGraphicsPushContext(ctx)
 
 		let viewableBounds: CGRect = bounds
-		let center = CGPoint(x: viewableBounds.width / 2, y: viewableBounds.height / 2)
+		let center = CGPoint(x: viewableBounds.width / 2.0, y: viewableBounds.height / 2.0)
 
 		// The intention here is to rotate the context to the "start angle" position
 		//		ctx.translateBy(x: center.x, y: center.y)
@@ -59,10 +75,8 @@ class CompassView: UIView {
 		//		// But we need to reset the origin
 		//		ctx.translateBy(x: -center.x, y: -center.y)
 		
-		let startAt = ((360.0 - (accuracy / 2.0)) - 90.0).toCGFloat
-		let endAt = ((accuracy / 2.0) - 90.0).toCGFloat
-		
-		logger.debug("Accuracy = \(accuracy); Range = \(startAt)-\(endAt)")
+		let startAt = ((360.0 - (headingAccuracy / 2.0)) - 90.0).toCGFloat
+		let endAt = ((headingAccuracy / 2.0) - 90.0).toCGFloat
 		
 		let size = min(viewableBounds.width, viewableBounds.height)
 		let radius = size / 2.0
@@ -79,11 +93,12 @@ class CompassView: UIView {
 		ctx.setLineWidth(3.0)
 		ctx.drawPath(using: .stroke)
 
+		let fillColor = colorBand.colorAt(locationAccuracy)
+
 		let x = (viewableBounds.width - size) / 2
 		let y = (viewableBounds.height - size) / 2
 		let compassBounds = CGRect(x: x, y: y, width: size, height: size)
-		logger.debug(compassBounds)
-		TrackMe.drawCompass(frame: compassBounds)
+		TrackMe.drawCompass(frame: compassBounds, fillColor: fillColor)
 	}
 
 }
