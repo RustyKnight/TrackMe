@@ -91,7 +91,7 @@ class CompassLayer: CALayer {
 		let x = (viewableBounds.width - size) / 2
 		let y = (viewableBounds.height - size) / 2
 		let compassBounds = CGRect(x: x, y: y, width: size, height: size)
-		logger.debug(compassBounds)
+		log(debug: "\(compassBounds)")
 		TrackMe.drawCompass(frame: compassBounds)
 		
 	}

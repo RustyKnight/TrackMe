@@ -9,7 +9,9 @@
 import UIKit
 import SwiftLocation
 import MapKit
-import XCGLogger
+import AELog
+import AEConsole
+import TwicketSegmentedControl
 
 extension Accuracy {
 	static func from(_ name: String) -> Accuracy? {
@@ -27,6 +29,9 @@ extension Accuracy {
 }
 
 class ViewController: UIViewController {
+
+	@IBOutlet weak var segmentedControl: TwicketSegmentedControl!
+	
 	@IBOutlet weak var trueHeading: UILabel!
 	
 	@IBOutlet weak var courseLabel: UILabel!
@@ -43,10 +48,34 @@ class ViewController: UIViewController {
 	
 	var headingRequest: HeadingRequest?
 	
+	var accuracyMap: [Int: Accuracy] = [
+		0: .any,
+		1: .country,
+		2: .city,
+		3: .neighborhood,
+		4: .block,
+		5: .house,
+		6: .room,
+		7: .navigation
+	]
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		monitorHeading = true
+		
+		let items = [
+			"Any",
+			"Country",
+			"City",
+			"Neighbourhood",
+			"Block",
+			"House",
+			"Room",
+			"Navigation"
+		]
+		segmentedControl.setSegmentItems(items)
+		segmentedControl.move(to: 0)
 		
 		let preferenceOrder: [Accuracy] = [
 			.any,
@@ -59,7 +88,7 @@ class ViewController: UIViewController {
 		}
 		let requestFail: LocObserver.onError = { request, location, error in
 			request.cancel()
-			logger.error(error)
+			log(error: error)
 		}
 		
 		Location.displayHeadingCalibration = true
@@ -90,12 +119,12 @@ class ViewController: UIViewController {
 	}
 	
 	func willEnterForeground(_ notification: NSNotification) {
-		logger.debug("In the foreground")
+		log(debug: "In the foreground")
 		monitorHeading = true
 	}
 	
 	func didEnterBackground(_ notification: NSNotification) {
-		logger.debug("In the background")
+		log(debug: "In the background")
 		monitorHeading = false
 	}
 	
@@ -113,10 +142,10 @@ class ViewController: UIViewController {
 						self.compassView.updateCompass(heading: heading)
 						self.trueHeading.text = "True Heading = \(self.format(double: abs(heading.trueHeading)))°"
 					}) { error in
-						logger.error("Failed to update heading \(error)")
+						log(error: "Failed to update heading \(error)")
 					}
 				} catch {
-					logger.error("Cannot start heading updates: \(error)")
+					log(error: "Cannot start heading updates: \(error)")
 				}
 			} else {
 				guard let headingRequest = headingRequest else {
@@ -165,6 +194,10 @@ class ViewController: UIViewController {
 		courseLabel.text = "Course \(format(double: abs(course)))°"
 	}
 	
-	
 }
 
+extension ViewController: TwicketSegmentedControlDelegate {
+	public func didSelect(_ segmentIndex: Int) {
+	
+	}
+}

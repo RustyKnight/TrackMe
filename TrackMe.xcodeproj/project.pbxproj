@@ -21,8 +21,6 @@
 		121257501EC53C6F000F1E26 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 121257491EC53C6F000F1E26 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		121257511EC53C6F000F1E26 /* SwiftLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1212574A1EC53C6F000F1E26 /* SwiftLocation.framework */; };
 		121257521EC53C6F000F1E26 /* SwiftLocation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1212574A1EC53C6F000F1E26 /* SwiftLocation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1270C6FC1EC5453B00D1B92C /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1270C6FB1EC5453B00D1B92C /* XCGLogger.framework */; };
-		1270C6FD1EC5453B00D1B92C /* XCGLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1270C6FB1EC5453B00D1B92C /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1270C7001EC5459F00D1B92C /* AppDelegate+Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1270C6FF1EC5459F00D1B92C /* AppDelegate+Logger.swift */; };
 		12C7B1741ED50BFC006F7264 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7B1731ED50BFC006F7264 /* CompassView.swift */; };
 		12EADD001EC54AA100268FB9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12EADCFF1EC54AA100268FB9 /* MapKit.framework */; };
@@ -33,6 +31,13 @@
 		5A68237176ADCB475C8949E9 /* CompassLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6820F527E73F4510C4DE05 /* CompassLayer.swift */; };
 		5A68243B2F7BFA3DEE0C91EB /* ColorUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68227A8FD873D1848A9BAE /* ColorUtilities.swift */; };
 		5A6828A70EAE5BB1163C4B95 /* Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A682EBB87D4FE75908ACD6D /* Numbers.swift */; };
+		5A682D049F46393861730FB4 /* AELog.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A68226AB37E3CC6D99EF43C /* AELog.plist */; };
+		7003F6421EE3DBD500BB01FD /* AEConsole.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003F63F1EE3DBD500BB01FD /* AEConsole.framework */; };
+		7003F6431EE3DBD500BB01FD /* AEConsole.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7003F63F1EE3DBD500BB01FD /* AEConsole.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7003F6441EE3DBD500BB01FD /* AELog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003F6401EE3DBD500BB01FD /* AELog.framework */; };
+		7003F6451EE3DBD500BB01FD /* AELog.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7003F6401EE3DBD500BB01FD /* AELog.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7003F6461EE3DBD500BB01FD /* TwicketSegmentedControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003F6411EE3DBD500BB01FD /* TwicketSegmentedControl.framework */; };
+		7003F6471EE3DBD500BB01FD /* TwicketSegmentedControl.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7003F6411EE3DBD500BB01FD /* TwicketSegmentedControl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,12 +57,14 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1270C6FD1EC5453B00D1B92C /* XCGLogger.framework in Embed Frameworks */,
 				1212574E1EC53C6F000F1E26 /* Realm.framework in Embed Frameworks */,
 				12EADD031EC54B1600268FB9 /* ObjcExceptionBridging.framework in Embed Frameworks */,
+				7003F6431EE3DBD500BB01FD /* AEConsole.framework in Embed Frameworks */,
+				7003F6451EE3DBD500BB01FD /* AELog.framework in Embed Frameworks */,
 				121257521EC53C6F000F1E26 /* SwiftLocation.framework in Embed Frameworks */,
 				1212574C1EC53C6F000F1E26 /* Hydra.framework in Embed Frameworks */,
 				121257501EC53C6F000F1E26 /* RealmSwift.framework in Embed Frameworks */,
+				7003F6471EE3DBD500BB01FD /* TwicketSegmentedControl.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,9 +93,13 @@
 		12EADD011EC54B1600268FB9 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/iOS/ObjcExceptionBridging.framework; sourceTree = "<group>"; };
 		3ED4AA18D503059EF55FF51F /* CLLocationCoordinate2D+Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Format.swift"; sourceTree = "<group>"; };
 		5A6820F527E73F4510C4DE05 /* CompassLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompassLayer.swift; sourceTree = "<group>"; };
+		5A68226AB37E3CC6D99EF43C /* AELog.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = AELog.plist; sourceTree = "<group>"; };
 		5A68227A8FD873D1848A9BAE /* ColorUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorUtilities.swift; sourceTree = "<group>"; };
 		5A682ADAE9FB4C763E44AD87 /* TrackMe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackMe.swift; path = StyleKit/TrackMe.swift; sourceTree = "<group>"; };
 		5A682EBB87D4FE75908ACD6D /* Numbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Numbers.swift; sourceTree = "<group>"; };
+		7003F63F1EE3DBD500BB01FD /* AEConsole.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AEConsole.framework; path = Carthage/Build/iOS/AEConsole.framework; sourceTree = "<group>"; };
+		7003F6401EE3DBD500BB01FD /* AELog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AELog.framework; path = Carthage/Build/iOS/AELog.framework; sourceTree = "<group>"; };
+		7003F6411EE3DBD500BB01FD /* TwicketSegmentedControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwicketSegmentedControl.framework; path = Carthage/Build/iOS/TwicketSegmentedControl.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,13 +107,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1270C6FC1EC5453B00D1B92C /* XCGLogger.framework in Frameworks */,
 				1212574D1EC53C6F000F1E26 /* Realm.framework in Frameworks */,
 				121257511EC53C6F000F1E26 /* SwiftLocation.framework in Frameworks */,
 				1212574B1EC53C6F000F1E26 /* Hydra.framework in Frameworks */,
+				7003F6441EE3DBD500BB01FD /* AELog.framework in Frameworks */,
 				12EADD001EC54AA100268FB9 /* MapKit.framework in Frameworks */,
 				1212574F1EC53C6F000F1E26 /* RealmSwift.framework in Frameworks */,
+				7003F6461EE3DBD500BB01FD /* TwicketSegmentedControl.framework in Frameworks */,
 				12EADD021EC54B1600268FB9 /* ObjcExceptionBridging.framework in Frameworks */,
+				7003F6421EE3DBD500BB01FD /* AEConsole.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +163,7 @@
 				5A6828E4253B8E089DDF8D0B /* StyleKit */,
 				5A682395D0FF9A61EB70E0A0 /* Layer */,
 				5A68252B0C85845C984D868E /* Extensions */,
+				5A68226AB37E3CC6D99EF43C /* AELog.plist */,
 			);
 			path = TrackMe;
 			sourceTree = "<group>";
@@ -166,6 +180,9 @@
 		1270C6FE1EC5454200D1B92C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7003F63F1EE3DBD500BB01FD /* AEConsole.framework */,
+				7003F6401EE3DBD500BB01FD /* AELog.framework */,
+				7003F6411EE3DBD500BB01FD /* TwicketSegmentedControl.framework */,
 				12EADD011EC54B1600268FB9 /* ObjcExceptionBridging.framework */,
 				12EADCFF1EC54AA100268FB9 /* MapKit.framework */,
 				1270C6FB1EC5453B00D1B92C /* XCGLogger.framework */,
@@ -307,6 +324,7 @@
 				121257321EC53A50000F1E26 /* LaunchScreen.storyboard in Resources */,
 				1212572F1EC53A50000F1E26 /* Assets.xcassets in Resources */,
 				1212572D1EC53A50000F1E26 /* Main.storyboard in Resources */,
+				5A682D049F46393861730FB4 /* AELog.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

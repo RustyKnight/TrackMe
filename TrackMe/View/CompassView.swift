@@ -57,7 +57,7 @@ class CompassView: UIView {
 		}
 		fromColor = fillColor
 		toColor = colorBand.colorAt(locationAccuracy)
-		logger.debug("locationAccuracy = \(locationAccuracy)")
+		log(debug: "locationAccuracy = \(locationAccuracy)")
 		stopTimer()
 		startTime = Date()
 		timer = Timer(

@@ -8,8 +8,10 @@
 
 import UIKit
 import XCGLogger
+import AEConsole
+import AELog
 
-let logger = XCGLogger(identifier: "advancedLogger", includeDefaultDestinations: false)
+//let logger = XCGLogger(identifier: "advancedLogger", includeDefaultDestinations: false)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		configureLogger()
-		logger.debug("Application did start")
+//		configureLogger()
+		AEConsole.launch(with: self)
 		return true
 	}
 
@@ -46,3 +48,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+func log(debug message: String) {
+	aelog("🐞 " + message)
+}
+
+func log(info message: String) {
+	aelog("💡 " + message)
+}
+
+func log(warn message: String) {
+	aelog("😱 " + message)
+}
+
+func log(error message: String) {
+	aelog("🔥 " + message)
+}
+
+func log(error message: Error) {
+	aelog("🔥 \(message)")
+}
