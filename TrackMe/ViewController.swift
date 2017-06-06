@@ -16,72 +16,93 @@ import TwicketSegmentedControl
 extension Accuracy {
 	static func from(_ name: String) -> Accuracy? {
 		switch name.lowercased() {
-			case "any": return .any
-			case "city": return .city
-			case "neighborhood": return .neighborhood
-			case "block": return .block
-			case "navigation": return .navigation
-			case "house": return .house
-			case "room": return .room
-			default: return nil
+		case "any": return .any
+		case "city": return .city
+		case "neighborhood": return .neighborhood
+		case "block": return .block
+		case "navigation": return .navigation
+		case "house": return .house
+		case "room": return .room
+		default: return nil
 		}
 	}
 }
 
 class ViewController: UIViewController {
 
-	@IBOutlet weak var segmentedControl: TwicketSegmentedControl!
-	
+	@IBOutlet weak var trackMeSegmentedControl: TwicketSegmentedControl!
+	@IBOutlet weak var accuracySegmentedControl: TwicketSegmentedControl!
+
 	@IBOutlet weak var trueHeading: UILabel!
-	
+
 	@IBOutlet weak var courseLabel: UILabel!
 	@IBOutlet weak var speedLabel: UILabel!
 	@IBOutlet weak var altitudeLabel: UILabel!
-	
+
 	@IBOutlet weak var latitudeLabel: UILabel!
 	@IBOutlet weak var longitudeLabel: UILabel!
-	
+
 	@IBOutlet weak var compassView: CompassView!
-	
+
 	let numberFormatter = NumberFormatter()
 	let measurementFormatter = MeasurementFormatter()
-	
+
 	var headingRequest: HeadingRequest?
-	
+
 	var accuracyMap: [Int: Accuracy] = [
 		0: .any,
-		1: .country,
-		2: .city,
-		3: .neighborhood,
-		4: .block,
-		5: .house,
-		6: .room,
-		7: .navigation
+//		1: .country,
+		1: .city,
+		2: .neighborhood,
+		3: .block,
+		4: .house,
+//		6: .room,
+		5: .navigation
 	]
-	
+
+	var accuracyDelegate: ConsolidatedTwicketSegmentedControlDelegate!
+	var stateDelegate: ConsolidatedTwicketSegmentedControlDelegate!
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+
+		accuracyDelegate = ConsolidatedTwicketSegmentedControlDelegate(accuracyDidChange)
+		stateDelegate = ConsolidatedTwicketSegmentedControlDelegate(stateDidChange)
+
 		monitorHeading = true
-		
+
 		let items = [
 			"Any",
-			"Country",
-			"City",
-			"Neighbourhood",
-			"Block",
-			"House",
-			"Room",
-			"Navigation"
+//			"Country",
+			"~3km",
+			"~1km",
+			"~100m",
+			"~10m",
+//			"Room",
+			"Best"
 		]
-		segmentedControl.setSegmentItems(items)
-		segmentedControl.move(to: 0)
-		
+		accuracySegmentedControl.setSegmentItems(items)
+		accuracySegmentedControl.move(to: 0)
+		accuracySegmentedControl.backgroundColor = UIColor.black
+		accuracySegmentedControl.isSliderShadowHidden = true
+		accuracySegmentedControl.delegate = accuracyDelegate
+
+		let stateItems = [
+			"On",
+			"Off",
+		]
+		trackMeSegmentedControl.setSegmentItems(stateItems)
+		trackMeSegmentedControl.move(to: 0)
+		trackMeSegmentedControl.backgroundColor = UIColor.black
+		trackMeSegmentedControl.isSliderShadowHidden = true
+		trackMeSegmentedControl.sliderBackgroundColor = UIColor.green
+		trackMeSegmentedControl.delegate = stateDelegate
+
 		let preferenceOrder: [Accuracy] = [
 			.any,
 			.navigation
 		]
-		
+
 		let requestSuccess: LocObserver.onSuccess = { request, location in
 			self.update(location)
 			self.compassView.update(location: location)
@@ -90,9 +111,9 @@ class ViewController: UIViewController {
 			request.cancel()
 			log(error: error)
 		}
-		
+
 		Location.displayHeadingCalibration = true
-		
+
 		for accuracy in preferenceOrder {
 			let request = Location.getLocation(
 					accuracy: accuracy,
@@ -101,7 +122,7 @@ class ViewController: UIViewController {
 					error: requestFail)
 			request.name = accuracy.description
 		}
-		
+
 		NotificationCenter.default.addObserver(
 				self,
 				selector: #selector(willEnterForeground),
@@ -113,21 +134,33 @@ class ViewController: UIViewController {
 				name: NSNotification.Name.UIApplicationDidEnterBackground,
 				object: nil)
 	}
-	
+
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 	}
-	
+
+	func accuracyDidChange(_ segment: Int) {
+
+	}
+
+	func stateDidChange(_ segment: Int) {
+		switch segment {
+		case 0: trackMeSegmentedControl.sliderBackgroundColor = UIColor.green
+		case 1: trackMeSegmentedControl.sliderBackgroundColor = UIColor.red
+		default: break
+		}
+	}
+
 	func willEnterForeground(_ notification: NSNotification) {
 		log(debug: "In the foreground")
 		monitorHeading = true
 	}
-	
+
 	func didEnterBackground(_ notification: NSNotification) {
 		log(debug: "In the background")
 		monitorHeading = false
 	}
-	
+
 	var monitorHeading: Bool = true {
 		didSet {
 			if monitorHeading {
@@ -160,44 +193,53 @@ class ViewController: UIViewController {
 	func format(double number: Double) -> String {
 		return format(NSNumber(value: number))
 	}
-	
+
 	func format(_ number: NSNumber) -> String {
 		guard let text = self.numberFormatter.string(from: number) else {
 			return "\(number)"
 		}
 		return text
 	}
-	
+
 	func update(_ location: CLLocation) {
 		let coordinate = location.coordinate
 		let altitude = location.altitude
-		
+
 		let hAccuracy = location.horizontalAccuracy
 		let vAccuracy = location.verticalAccuracy
-		
+
 		let speed = location.speed
 		let course = location.course
-		
+
 		latitudeLabel.text = "Lat = \(coordinate.latitudeDegreeDescription)"
 		longitudeLabel.text = "Lon = \(coordinate.longitudeDegreeDescription)"
-		
+
 		let altitudeMeasurement = Measurement(value: altitude, unit: UnitLength.meters);
 		let hAccuracyMeasurement = Measurement(value: hAccuracy, unit: UnitLength.meters);
 		let vAccuracyMeasurement = Measurement(value: vAccuracy, unit: UnitLength.meters);
 		let speedMeasurement = Measurement(value: speed, unit: UnitSpeed.metersPerSecond);
-		
+
 		measurementFormatter.unitOptions = .naturalScale
 		measurementFormatter.unitStyle = .short
-		
+
 		altitudeLabel.text = "Altitude = \(measurementFormatter.string(from: altitudeMeasurement))"
 		speedLabel.text = "Speed = \(measurementFormatter.string(from: speedMeasurement))"
 		courseLabel.text = "Course \(format(double: abs(course)))°"
 	}
-	
+
 }
 
-extension ViewController: TwicketSegmentedControlDelegate {
+typealias SegmentSelection = (_ segmentIndex: Int) -> Void
+
+class ConsolidatedTwicketSegmentedControlDelegate: TwicketSegmentedControlDelegate {
+
+	let monitor: SegmentSelection
+
+	init(_ monitor: @escaping SegmentSelection) {
+		self.monitor = monitor
+	}
+
 	public func didSelect(_ segmentIndex: Int) {
-	
+		monitor(segmentIndex)
 	}
 }

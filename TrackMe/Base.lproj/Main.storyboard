@@ -22,9 +22,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yIx-eV-v1R" customClass="TwicketSegmentedControl" customModule="TwicketSegmentedControl">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yIx-eV-v1R" customClass="TwicketSegmentedControl" customModule="TwicketSegmentedControl">
                                 <rect key="frame" x="24" y="28" width="327" height="40"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Ykb-Nf-sly"/>
                                 </constraints>
@@ -89,28 +89,39 @@
                                     <constraint firstItem="6pd-ro-6e3" firstAttribute="centerX" secondItem="oGr-W6-6h0" secondAttribute="centerX" id="wfo-sV-SdW"/>
                                 </constraints>
                             </view>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXJ-h8-78A" customClass="TwicketSegmentedControl" customModule="TwicketSegmentedControl">
+                                <rect key="frame" x="24" y="619" width="327" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="RnR-mV-rH6"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="oGr-W6-6h0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="1Ia-xr-cre"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kXJ-h8-78A" secondAttribute="trailing" constant="8" id="GMK-q5-6LX"/>
                             <constraint firstItem="oGr-W6-6h0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NOq-br-xkz"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ymF-4p-zQf" secondAttribute="bottom" id="WBQ-a8-qfG"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kXJ-h8-78A" secondAttribute="bottom" constant="8" id="dPg-GF-gSf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ymF-4p-zQf" secondAttribute="trailing" id="knR-Uw-El0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yIx-eV-v1R" secondAttribute="trailing" constant="8" id="lmq-6d-D2E"/>
                             <constraint firstItem="ymF-4p-zQf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="myr-Of-ePd"/>
                             <constraint firstItem="ymF-4p-zQf" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="nhY-qa-Afg"/>
                             <constraint firstItem="yIx-eV-v1R" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="qIh-0a-ikW"/>
+                            <constraint firstItem="kXJ-h8-78A" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="uk5-GL-GFC"/>
                             <constraint firstItem="yIx-eV-v1R" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="vLc-uP-ucZ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="accuracySegmentedControl" destination="yIx-eV-v1R" id="Q0i-c9-SCT"/>
                         <outlet property="altitudeLabel" destination="0Ov-Jv-5EY" id="2mc-Ep-Ysc"/>
                         <outlet property="compassView" destination="ymF-4p-zQf" id="vhi-br-VhI"/>
                         <outlet property="courseLabel" destination="mUV-Lk-fE6" id="RuV-A3-EOR"/>
                         <outlet property="latitudeLabel" destination="2Tq-VA-GEU" id="b2s-ug-8ce"/>
                         <outlet property="longitudeLabel" destination="AHK-a6-GVR" id="cXB-ba-K4p"/>
-                        <outlet property="segmentedControl" destination="yIx-eV-v1R" id="Bbs-jB-Aa0"/>
                         <outlet property="speedLabel" destination="Wyo-r3-yIy" id="7GZ-EZ-DZ4"/>
+                        <outlet property="trackMeSegmentedControl" destination="kXJ-h8-78A" id="lkM-9R-vlg"/>
                         <outlet property="trueHeading" destination="KKw-tP-jkX" id="OcV-I3-Wd9"/>
                     </connections>
                 </viewController>
