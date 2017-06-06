@@ -27,6 +27,7 @@
 		12EADD021EC54B1600268FB9 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12EADD011EC54B1600268FB9 /* ObjcExceptionBridging.framework */; };
 		12EADD031EC54B1600268FB9 /* ObjcExceptionBridging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 12EADD011EC54B1600268FB9 /* ObjcExceptionBridging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ED4A4CC780DE0794C8ED606 /* CLLocationCoordinate2D+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED4AA18D503059EF55FF51F /* CLLocationCoordinate2D+Format.swift */; };
+		3ED4A7EE2F460810ADEC093C /* AEConsole.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3ED4A32BBD3FF1282B6EBD68 /* AEConsole.plist */; };
 		5A68204145C839BD58C34044 /* TrackMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A682ADAE9FB4C763E44AD87 /* TrackMe.swift */; };
 		5A68237176ADCB475C8949E9 /* CompassLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6820F527E73F4510C4DE05 /* CompassLayer.swift */; };
 		5A68243B2F7BFA3DEE0C91EB /* ColorUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68227A8FD873D1848A9BAE /* ColorUtilities.swift */; };
@@ -91,6 +92,7 @@
 		12C7B1731ED50BFC006F7264 /* CompassView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompassView.swift; path = View/CompassView.swift; sourceTree = "<group>"; };
 		12EADCFF1EC54AA100268FB9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		12EADD011EC54B1600268FB9 /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcExceptionBridging.framework; path = Carthage/Build/iOS/ObjcExceptionBridging.framework; sourceTree = "<group>"; };
+		3ED4A32BBD3FF1282B6EBD68 /* AEConsole.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = AEConsole.plist; sourceTree = "<group>"; };
 		3ED4AA18D503059EF55FF51F /* CLLocationCoordinate2D+Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Format.swift"; sourceTree = "<group>"; };
 		5A6820F527E73F4510C4DE05 /* CompassLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompassLayer.swift; sourceTree = "<group>"; };
 		5A68226AB37E3CC6D99EF43C /* AELog.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = AELog.plist; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				5A682395D0FF9A61EB70E0A0 /* Layer */,
 				5A68252B0C85845C984D868E /* Extensions */,
 				5A68226AB37E3CC6D99EF43C /* AELog.plist */,
+				3ED4A32BBD3FF1282B6EBD68 /* AEConsole.plist */,
 			);
 			path = TrackMe;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				1212572F1EC53A50000F1E26 /* Assets.xcassets in Resources */,
 				1212572D1EC53A50000F1E26 /* Main.storyboard in Resources */,
 				5A682D049F46393861730FB4 /* AELog.plist in Resources */,
+				3ED4A7EE2F460810ADEC093C /* AEConsole.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

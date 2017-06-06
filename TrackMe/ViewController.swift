@@ -60,6 +60,15 @@ class ViewController: UIViewController {
 		5: .navigation
 	]
 
+	var accuracy: Accuracy {
+		let index = accuracySegmentedControl.selectedSegmentIndex
+		return accuracyMap[index]!
+	}
+	var isOn: Bool {
+		return trackMeSegmentedControl.selectedSegmentIndex == 0
+	}
+	var locationRequest: LocationRequest?
+
 	var accuracyDelegate: ConsolidatedTwicketSegmentedControlDelegate!
 	var stateDelegate: ConsolidatedTwicketSegmentedControlDelegate!
 
@@ -77,7 +86,7 @@ class ViewController: UIViewController {
 			"~3km",
 			"~1km",
 			"~100m",
-			"~10m",
+			"~15m",
 //			"Room",
 			"Best"
 		]
@@ -86,6 +95,7 @@ class ViewController: UIViewController {
 		accuracySegmentedControl.backgroundColor = UIColor.black
 		accuracySegmentedControl.isSliderShadowHidden = true
 		accuracySegmentedControl.delegate = accuracyDelegate
+		accuracyDidChange(0)
 
 		let stateItems = [
 			"On",
@@ -97,31 +107,14 @@ class ViewController: UIViewController {
 		trackMeSegmentedControl.isSliderShadowHidden = true
 		trackMeSegmentedControl.sliderBackgroundColor = UIColor.green
 		trackMeSegmentedControl.delegate = stateDelegate
+		stateDidChange(00)
 
 		let preferenceOrder: [Accuracy] = [
 			.any,
 			.navigation
 		]
 
-		let requestSuccess: LocObserver.onSuccess = { request, location in
-			self.update(location)
-			self.compassView.update(location: location)
-		}
-		let requestFail: LocObserver.onError = { request, location, error in
-			request.cancel()
-			log(error: error)
-		}
-
 		Location.displayHeadingCalibration = true
-
-		for accuracy in preferenceOrder {
-			let request = Location.getLocation(
-					accuracy: accuracy,
-					frequency: .continuous,
-					success: requestSuccess,
-					error: requestFail)
-			request.name = accuracy.description
-		}
 
 		NotificationCenter.default.addObserver(
 				self,
@@ -140,13 +133,47 @@ class ViewController: UIViewController {
 	}
 
 	func accuracyDidChange(_ segment: Int) {
+		log(debug: "Segment = \(segment)")
+		guard let accuracy = accuracyMap[segment] else {
+			return
+		}
+		updateAccuracy()
+	}
 
+	func updateAccuracy() {
+		if let locationRequest = locationRequest {
+			locationRequest.cancel()
+		}
+		guard isOn else {
+			return
+		}
+		let requestSuccess: LocObserver.onSuccess = { request, location in
+			self.update(location)
+			self.compassView.update(location: location)
+		}
+		let requestFail: LocObserver.onError = { request, location, error in
+			request.cancel()
+			log(error: error)
+		}
+
+		locationRequest = Location.getLocation(
+				accuracy: accuracy,
+				frequency: .continuous,
+				success: requestSuccess,
+				error: requestFail)
+		locationRequest?.name = accuracy.description
 	}
 
 	func stateDidChange(_ segment: Int) {
 		switch segment {
-		case 0: trackMeSegmentedControl.sliderBackgroundColor = UIColor.green
-		case 1: trackMeSegmentedControl.sliderBackgroundColor = UIColor.red
+		case 0:
+			trackMeSegmentedControl.sliderBackgroundColor = UIColor.green
+			updateAccuracy()
+		case 1:
+			trackMeSegmentedControl.sliderBackgroundColor = UIColor.red
+			if let locationRequest = locationRequest {
+				locationRequest.cancel()
+			}
 		default: break
 		}
 	}
@@ -202,6 +229,7 @@ class ViewController: UIViewController {
 	}
 
 	func update(_ location: CLLocation) {
+		log(debug: "\(location)")
 		let coordinate = location.coordinate
 		let altitude = location.altitude
 
