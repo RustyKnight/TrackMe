@@ -10,7 +10,8 @@ github "RustyKnight/Hydra"
 github "tadija/AELog"
 github "tadija/AEConsole"
 
-github "twicketapp/TwicketSegmentedControl"
+#github "twicketapp/TwicketSegmentedControl"
+github "gmarm/BetterSegmentedControl"
 
 #github "RustyKnight/KZCoreUILibrary"
 #github "RustyKnight/KZCoreLibrary"

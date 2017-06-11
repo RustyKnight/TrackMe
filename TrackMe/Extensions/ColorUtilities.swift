@@ -105,6 +105,7 @@ public struct ColorBandBuilder {
 	public init() {
 	}
 	
+	@discardableResult
 	public mutating func add(color:UIColor, at: Double) -> ColorBandBuilder {
 		entries.append(ColorBandEntry(withColor: color, at: at))
 		return self

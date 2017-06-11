@@ -48,10 +48,12 @@ class CompassView: UIView {
 		backgroundColor = nil
 	}
 	
-	func update(location: CLLocation) {
-		let accuracy = min(location.horizontalAccuracy, 20.0)
+	func update(location: CLLocation, minimumAcceptableRange range: CLLocationDistance) {
+		let limit = range + (range * 0.5)
+		let accuracy = min(location.horizontalAccuracy, range + (range * 0.5))
 		let lastAccuracy = locationAccuracy
-		locationAccuracy = accuracy / 20.0
+		log(debug: "accuracy = \(accuracy); range = \(limit)")
+		locationAccuracy = accuracy / limit
 		guard lastAccuracy != locationAccuracy else {
 			return
 		}
@@ -119,7 +121,7 @@ class CompassView: UIView {
 		UIGraphicsPushContext(ctx)
 
 		let viewableBounds: CGRect = bounds
-		let center = CGPoint(x: viewableBounds.width / 2.0, y: viewableBounds.height / 2.0)
+//		let center = CGPoint(x: viewableBounds.width / 2.0, y: viewableBounds.height / 2.0)
 
 		// The intention here is to rotate the context to the "start angle" position
 		//		ctx.translateBy(x: center.x, y: center.y)
@@ -128,28 +130,32 @@ class CompassView: UIView {
 		//		// But we need to reset the origin
 		//		ctx.translateBy(x: -center.x, y: -center.y)
 		
-		let startAt = ((360.0 - (headingAccuracy / 2.0)) - 90.0).toCGFloat
-		let endAt = ((headingAccuracy / 2.0) - 90.0).toCGFloat
+		let endAt = ((360.0 - (headingAccuracy / 2.0)) + 90.0).toCGFloat
+		let startAt = ((headingAccuracy / 2.0) + 90.0).toCGFloat
 		
 		let size = min(viewableBounds.width, viewableBounds.height)
-		let radius = size / 2.0
-		let path = CGMutablePath()
-		path.addArc(
-				center: center,
-				radius: radius,
-				startAngle: startAt.toRadians,
-				endAngle: endAt.toRadians,
-				clockwise: false)
-		
-		ctx.addPath(path)
-		ctx.setStrokeColor(UIColor.red.cgColor)
-		ctx.setLineWidth(3.0)
-		ctx.drawPath(using: .stroke)
-
+//		let radius = size / 2.0
+//		let path = CGMutablePath()
+//		path.addArc(
+//				center: center,
+//				radius: radius,
+//				startAngle: startAt.toRadians,
+//				endAngle: endAt.toRadians,
+//				clockwise: false)
+//		
+//		ctx.addPath(path)
+//		ctx.setStrokeColor(UIColor.red.cgColor)
+//		ctx.setLineWidth(3.0)
+//		ctx.drawPath(using: .stroke)
+//
 		let x = (viewableBounds.width - size) / 2
 		let y = (viewableBounds.height - size) / 2
 		let compassBounds = CGRect(x: x, y: y, width: size, height: size)
-		TrackMe.drawCompass(frame: compassBounds, fillColor: fillColor)
+		TrackMe.drawCompass(
+			frame: compassBounds,
+			fillColor: fillColor,
+			accuracyFrom: startAt,
+			accuracyTo: endAt)
 	}
 
 }

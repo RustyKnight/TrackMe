@@ -1,6 +1,6 @@
 github "RustyKnight/Hydra" "v1.0.0"
 github "RustyKnight/realm-cocoa" "v2.6.0"
+github "gmarm/BetterSegmentedControl" "0.8"
 github "malcommac/SwiftLocation" "2.0.7"
 github "tadija/AEConsole" "0.3.0"
 github "tadija/AELog" "0.3.0"
-github "twicketapp/TwicketSegmentedControl" "0.1.2"

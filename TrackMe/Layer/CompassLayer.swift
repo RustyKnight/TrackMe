@@ -77,7 +77,7 @@ class CompassLayer: CALayer {
 		UIGraphicsPushContext(ctx)
 		
 		let viewableBounds: CGRect = bounds
-		let center = CGPoint(x: viewableBounds.width / 2, y: viewableBounds.height / 2)
+//		let center = CGPoint(x: viewableBounds.width / 2, y: viewableBounds.height / 2)
 		
 		
 		// The intention here is to rotate the context to the "start angle" position

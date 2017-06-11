@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import XCGLogger
 
 extension AppDelegate {
 //	func configureLogger() {

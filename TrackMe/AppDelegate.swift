@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import XCGLogger
 import AEConsole
 import AELog
 
