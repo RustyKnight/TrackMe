@@ -31,6 +31,7 @@
 		5A68243B2F7BFA3DEE0C91EB /* ColorUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68227A8FD873D1848A9BAE /* ColorUtilities.swift */; };
 		5A6828A70EAE5BB1163C4B95 /* Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A682EBB87D4FE75908ACD6D /* Numbers.swift */; };
 		5A682D049F46393861730FB4 /* AELog.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A68226AB37E3CC6D99EF43C /* AELog.plist */; };
+		5A682DE622D46B29FCF5BD86 /* Trek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A682C357BAD76103865D67C /* Trek.swift */; };
 		7003F6421EE3DBD500BB01FD /* AEConsole.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003F63F1EE3DBD500BB01FD /* AEConsole.framework */; };
 		7003F6431EE3DBD500BB01FD /* AEConsole.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7003F63F1EE3DBD500BB01FD /* AEConsole.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7003F6441EE3DBD500BB01FD /* AELog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003F6401EE3DBD500BB01FD /* AELog.framework */; };
@@ -93,6 +94,7 @@
 		5A68226AB37E3CC6D99EF43C /* AELog.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = AELog.plist; sourceTree = "<group>"; };
 		5A68227A8FD873D1848A9BAE /* ColorUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorUtilities.swift; sourceTree = "<group>"; };
 		5A682ADAE9FB4C763E44AD87 /* TrackMe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackMe.swift; path = StyleKit/TrackMe.swift; sourceTree = "<group>"; };
+		5A682C357BAD76103865D67C /* Trek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trek.swift; sourceTree = "<group>"; };
 		5A682EBB87D4FE75908ACD6D /* Numbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Numbers.swift; sourceTree = "<group>"; };
 		7003F63F1EE3DBD500BB01FD /* AEConsole.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AEConsole.framework; path = Carthage/Build/iOS/AEConsole.framework; sourceTree = "<group>"; };
 		7003F6401EE3DBD500BB01FD /* AELog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AELog.framework; path = Carthage/Build/iOS/AELog.framework; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				5A68252B0C85845C984D868E /* Extensions */,
 				5A68226AB37E3CC6D99EF43C /* AELog.plist */,
 				3ED4A32BBD3FF1282B6EBD68 /* AEConsole.plist */,
+				5A682C357BAD76103865D67C /* Trek.swift */,
 			);
 			path = TrackMe;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				5A68237176ADCB475C8949E9 /* CompassLayer.swift in Sources */,
 				5A6828A70EAE5BB1163C4B95 /* Numbers.swift in Sources */,
 				5A68243B2F7BFA3DEE0C91EB /* ColorUtilities.swift in Sources */,
+				5A682DE622D46B29FCF5BD86 /* Trek.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

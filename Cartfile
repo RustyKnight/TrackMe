@@ -1,7 +1,8 @@
 #github "RustyKnight/MBProgressHUD" == 2.3.0
 #github "RustyKnight/CBZSplashViewLib" == 2.3.11
 
-github "malcommac/SwiftLocation"
+#github "malcommac/SwiftLocation"
+github "RustyKnight/SwiftLocation" "develop"
 github "RustyKnight/realm-cocoa" == 2.6.0
 github "RustyKnight/Hydra"
 
@@ -15,3 +16,5 @@ github "gmarm/BetterSegmentedControl"
 
 #github "RustyKnight/KZCoreUILibrary"
 #github "RustyKnight/KZCoreLibrary"
+
+github "RustyKnight/TableViewKit" "master"

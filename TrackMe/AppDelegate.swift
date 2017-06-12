@@ -48,22 +48,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 
-func log(debug message: String) {
-	aelog("🐞 " + message)
+func log(debug message: String, path: String = #file, lineNumber: Int = #line, function: String = #function) {
+	aelog("🐞 " + message, path: path, lineNumber: lineNumber, function: function)
 }
 
-func log(info message: String) {
-	aelog("💡 " + message)
+func log(info message: String, path: String = #file, lineNumber: Int = #line, function: String = #function) {
+	aelog("💡 " + message, path: path, lineNumber: lineNumber, function: function)
 }
 
-func log(warn message: String) {
-	aelog("😱 " + message)
+func log(warn message: String, path: String = #file, lineNumber: Int = #line, function: String = #function) {
+	aelog("😱 " + message, path: path, lineNumber: lineNumber, function: function)
 }
 
-func log(error message: String) {
-	aelog("🔥 " + message)
+func log(error message: String, path: String = #file, lineNumber: Int = #line, function: String = #function) {
+	aelog("🔥 " + message, path: path, lineNumber: lineNumber, function: function)
 }
 
-func log(error message: Error) {
-	aelog("🔥 \(message)")
+func log(error message: Error, path: String = #file, lineNumber: Int = #line, function: String = #function) {
+	aelog("🔥 \(message)", path: path, lineNumber: lineNumber, function: function)
 }

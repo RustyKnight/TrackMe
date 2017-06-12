@@ -67,12 +67,63 @@ class ViewController: UIViewController {
 		let index = accuracySetting.index
 		return accuracyMap[index]!
 	}
+	
 	var isOn: Bool {
 		return trackMeStatus.index == 0
 	}
 	var locationRequest: LocationRequest?
 	
 	var updates: Int = 0
+	
+	var monitorHeading: Bool = true {
+		didSet {
+			if monitorHeading {
+				if let headingRequest = headingRequest {
+					headingRequest.cancel()
+					self.headingRequest = nil
+				}
+				do {
+					headingRequest = try Location.getContinousHeading(
+							filter: 0.2,
+							success: onHeadingUpdate,
+							failure: onHeadingFailure)
+				} catch let error {
+					log(error: "Cannot start heading updates: \(error)")
+				}
+			} else {
+				guard let headingRequest = headingRequest else {
+					return
+				}
+				headingRequest.cancel()
+				self.headingRequest = nil
+			}
+		}
+	}
+	
+	var pulseCount: Int = 0
+	var pulseLimit: Int = 100
+	
+	var pulseRequest: LocationRequest {
+		pulseCount = 0
+		return LocationRequest(
+				name: accuracy.description,
+				accuracy: accuracy,
+				frequency: .continuous,
+				activity: .fitness,
+				onPulseUpdate,
+				onLocationFailure)
+	}
+	
+	var standardRequest: LocationRequest {
+		return LocationRequest(
+				name: accuracy.description,
+				accuracy: accuracy,
+				frequency: .continuous,
+				activity: .fitness,
+				minimumDistance: 10.0,
+				onLocationUpdate,
+				onLocationFailure)
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -160,35 +211,12 @@ class ViewController: UIViewController {
 	}
 	
 	func updateAccuracy() {
-		if let locationRequest = locationRequest {
-			locationRequest.cancel()
-		}
+		cancelLocationRequest()
 		guard isOn else {
 			return
 		}
-		let requestSuccess: LocObserver.onSuccess = { request, location in
-			self.update(location)
-			self.updates += 1
-			self.updateCount.text = String(self.updates)
-			let range = self.accuracy.level
-			log(debug: "location = \(location); accuracy = \(range)")
-			self.compassView.update(
-					location: location,
-					minimumAcceptableRange: range)
-		}
-		let requestFail: LocObserver.onError = { request, location, error in
-			request.cancel()
-			log(error: error)
-		}
 		
-		locationRequest = LocationRequest(
-				name: accuracy.description,
-				accuracy: accuracy,
-				frequency: .continuous,
-				requestSuccess,
-				requestFail)
-		locationRequest?.minimumDistance = 10.0
-		locationRequest?.activity = .fitness
+		locationRequest = pulseRequest
 		locationRequest?.resume()
 	}
 	
@@ -210,50 +238,9 @@ class ViewController: UIViewController {
 				}
 //				trackMeSegmentedControl.sliderBackgroundColor = UIColor.red
 				monitorHeading = false
-				if let locationRequest = locationRequest {
-					locationRequest.cancel()
-				}
+				cancelLocationRequest()
 				self.update(nil)
 			default: break
-		}
-	}
-	
-	func willEnterForeground(_ notification: NSNotification) {
-		log(debug: "In the foreground")
-		monitorHeading = true
-	}
-	
-	func didEnterBackground(_ notification: NSNotification) {
-		log(debug: "In the background")
-		monitorHeading = false
-	}
-	
-	var monitorHeading: Bool = true {
-		didSet {
-			if monitorHeading {
-				do {
-					headingRequest = try Location.getContinousHeading(filter: 0.2, success: { result in
-						let heading = result.1
-						if heading.headingAccuracy > 5.0 {
-							Location.displayHeadingCalibration = true
-						} else {
-							Location.displayHeadingCalibration = false
-						}
-						self.compassView.updateCompass(heading: heading)
-						self.trueHeading.text = "True Heading = \(self.format(double: abs(heading.trueHeading)))°"
-					}) { error in
-						log(error: "Failed to update heading \(error)")
-					}
-				} catch {
-					log(error: "Cannot start heading updates: \(error)")
-				}
-			} else {
-				guard let headingRequest = headingRequest else {
-					return
-				}
-				headingRequest.cancel()
-				self.headingRequest = nil
-			}
 		}
 	}
 	
@@ -269,7 +256,6 @@ class ViewController: UIViewController {
 	}
 	
 	func update(_ location: CLLocation?) {
-		log(debug: "\(location)")
 		guard let location = location else {
 			latitudeLabel.text = "Lat = ---"
 			longitudeLabel.text = "Lon = ---"
@@ -313,6 +299,85 @@ class ViewController: UIViewController {
 		measurementFormatter.unitStyle = .short
 		
 		return measurementFormatter.string(for: measurement) ?? format(double: accuracy.level)
+	}
+	
+}
+
+extension ViewController {
+	
+	func willEnterForeground(_ notification: NSNotification) {
+		log(debug: "In the foreground")
+		monitorHeading = true
+		cancelLocationRequest()
+		locationRequest = pulseRequest
+		locationRequest?.resume()
+	}
+	
+	func didEnterBackground(_ notification: NSNotification) {
+		log(debug: "In the background")
+		monitorHeading = false
+		cancelLocationRequest()
+		locationRequest = standardRequest
+		locationRequest?.resume()
+	}
+	
+}
+
+extension ViewController {
+	
+	func onHeadingUpdate(_ request: HeadingRequest, _ heading: CLHeading) -> Void {
+		if heading.headingAccuracy > 5.0 {
+			Location.displayHeadingCalibration = true
+		} else {
+			Location.displayHeadingCalibration = false
+		}
+		self.compassView.updateCompass(heading: heading)
+		self.trueHeading.text = "True Heading = \(self.format(double: abs(heading.trueHeading)))°"
+	}
+	
+	func onHeadingFailure(_ request: HeadingRequest, _ error: Error) -> Void {
+		log(error: "Failed to update heading \(error)")
+	}
+	
+}
+
+extension ViewController {
+
+	func cancelLocationRequest() {
+		if let locationRequest = locationRequest {
+			log(debug: "Cancel Request")
+			locationRequest.cancel()
+		}
+	}
+	
+	func onPulseUpdate(_ request: LocationRequest, _ location: CLLocation) -> Void {
+		pulseCount += 1
+		let accuracy = self.accuracy
+		if pulseCount >= pulseLimit || location.horizontalAccuracy >= accuracy.level {
+			cancelLocationRequest()
+			locationRequest = standardRequest
+			locationRequest?.resume()
+		}
+		onLocationUpdate(request, location)
+	}
+	
+	func onLocationUpdate(_ request: LocationRequest, _ location: CLLocation) -> Void {
+		self.update(location)
+		self.updates += 1
+		self.updateCount.text = String(self.updates)
+		let range = self.accuracy.level
+		self.compassView.update(
+				location: location,
+				minimumAcceptableRange: range)
+	}
+	
+	func onLocationFailure(_ request: LocationRequest, _ lastLocation: CLLocation?, _ error: Error) -> Void {
+		request.cancel()
+		if let locationRequest = locationRequest {
+			locationRequest.cancel()
+			self.locationRequest = nil
+		}
+		log(error: error)
 	}
 	
 }
