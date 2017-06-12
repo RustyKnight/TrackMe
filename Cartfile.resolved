@@ -1,6 +1,6 @@
 github "RustyKnight/Hydra" "v1.0.0"
 github "RustyKnight/SwiftLocation" "c45d12ccf3b9013ead8a939d0fc736155538b6a1"
-github "RustyKnight/TableViewKit" "5b4bfe7c7b81a60e9e05970024de32931b609146"
+github "RustyKnight/TableViewKit" "f1225348354be53b6bb800951be5e482cae32a62"
 github "RustyKnight/realm-cocoa" "v2.6.0"
 github "gmarm/BetterSegmentedControl" "0.8"
 github "tadija/AEConsole" "0.3.0"
