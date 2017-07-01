@@ -3,7 +3,7 @@
 
 #github "malcommac/SwiftLocation"
 github "RustyKnight/SwiftLocation" "develop"
-github "RustyKnight/realm-cocoa" == 2.6.0
+github "RustyKnight/realm-cocoa" == 3.0.1
 github "RustyKnight/Hydra"
 
 #github "DaveWoodCom/XCGLogger" ~> 5.0.1

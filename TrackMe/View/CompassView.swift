@@ -79,7 +79,7 @@ class CompassView: UIView {
 		self.timer = timer
 	}
 	
-	func fadeColor(_ sender: Timer) {
+	@objc func fadeColor(_ sender: Timer) {
 		guard let startTime = startTime else {
 			stopTimer();
 			return

@@ -7,13 +7,13 @@ import Foundation
 import RealmSwift
 
 class Trek: Object {
-	dynamic var name: String = ""
-	dynamic var localeIdentifiers = ""
+    @objc dynamic var name: String = ""
+    @objc dynamic var localeIdentifiers = ""
 }
 
 class TrekPoint: Object {
-	dynamic var trip: Trek!
-	dynamic var latitude = 0.0
-	dynamic var longitude = 0.0
-	dynamic var created = Date()
+    @objc dynamic var trip: Trek!
+    @objc dynamic var latitude = 0.0
+    @objc dynamic var longitude = 0.0
+    @objc dynamic var created = Date()
 }

@@ -19,7 +19,7 @@ public class TrackMe : NSObject {
 
     //// Drawing Methods
 
-    public dynamic class func drawCompass(frame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 320), fillColor: UIColor = UIColor(red: 0.800, green: 0.320, blue: 0.320, alpha: 1.000), accuracyStrokeColor: UIColor = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1.000), accuracyFrom: CGFloat = 100, accuracyTo: CGFloat = 80) {
+    @objc public dynamic class func drawCompass(frame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 320), fillColor: UIColor = UIColor(red: 0.800, green: 0.320, blue: 0.320, alpha: 1.000), accuracyStrokeColor: UIColor = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1.000), accuracyFrom: CGFloat = 100, accuracyTo: CGFloat = 80) {
         //// General Declarations
         // This non-generic function dramatically improves compilation times of complex expressions.
         func fastFloor(_ x: CGFloat) -> CGFloat { return floor(x) }
@@ -65,7 +65,7 @@ public class TrackMe : NSObject {
 
     //// Generated Images
 
-    public dynamic class func imageOfCompass(imageSize: CGSize = CGSize(width: 320, height: 320), fillColor: UIColor = UIColor(red: 0.800, green: 0.320, blue: 0.320, alpha: 1.000), accuracyStrokeColor: UIColor = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1.000), accuracyFrom: CGFloat = 100, accuracyTo: CGFloat = 80) -> UIImage {
+    @objc public dynamic class func imageOfCompass(imageSize: CGSize = CGSize(width: 320, height: 320), fillColor: UIColor = UIColor(red: 0.800, green: 0.320, blue: 0.320, alpha: 1.000), accuracyStrokeColor: UIColor = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1.000), accuracyFrom: CGFloat = 100, accuracyTo: CGFloat = 80) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
             TrackMe.drawCompass(frame: CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height), fillColor: fillColor, accuracyStrokeColor: accuracyStrokeColor, accuracyFrom: accuracyFrom, accuracyTo: accuracyTo)
 
