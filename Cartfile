@@ -1,5 +1,5 @@
-#github "RustyKnight/MBProgressHUD" == 2.3.0
-#github "RustyKnight/CBZSplashViewLib" == 2.3.11
+github "RustyKnight/MBProgressHUD" == 2.5.0
+github "RustyKnight/CBZSplashViewLib" == 2.5.0
 
 #github "malcommac/SwiftLocation"
 github "RustyKnight/SwiftLocation" "develop"

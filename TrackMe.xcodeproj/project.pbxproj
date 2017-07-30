@@ -38,6 +38,11 @@
 		7003F6451EE3DBD500BB01FD /* AELog.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7003F6401EE3DBD500BB01FD /* AELog.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		702484111EECDE8400EE4821 /* BetterSegmentedControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 702484101EECDE8400EE4821 /* BetterSegmentedControl.framework */; };
 		702484121EECDE8400EE4821 /* BetterSegmentedControl.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 702484101EECDE8400EE4821 /* BetterSegmentedControl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		706553A01F09C32600ABEFD0 /* AdventuresTableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065539F1F09C32600ABEFD0 /* AdventuresTableViewSection.swift */; };
+		706553A21F09F3E800ABEFD0 /* AdventureTableViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706553A11F09F3E800ABEFD0 /* AdventureTableViewRow.swift */; };
+		706553A41F09F84D00ABEFD0 /* SegueIdentifable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706553A31F09F84D00ABEFD0 /* SegueIdentifable.swift */; };
+		70A7BCC31F08CB5100BE3BDE /* AdventuresTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7BCC21F08CB5100BE3BDE /* AdventuresTableViewModel.swift */; };
+		70CE689E1F08C5600031FFEE /* AdventuresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CE689D1F08C5600031FFEE /* AdventuresTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +104,14 @@
 		7003F63F1EE3DBD500BB01FD /* AEConsole.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AEConsole.framework; path = Carthage/Build/iOS/AEConsole.framework; sourceTree = "<group>"; };
 		7003F6401EE3DBD500BB01FD /* AELog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AELog.framework; path = Carthage/Build/iOS/AELog.framework; sourceTree = "<group>"; };
 		702484101EECDE8400EE4821 /* BetterSegmentedControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BetterSegmentedControl.framework; path = Carthage/Build/iOS/BetterSegmentedControl.framework; sourceTree = "<group>"; };
+		7065539F1F09C32600ABEFD0 /* AdventuresTableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdventuresTableViewSection.swift; path = View/Adventures/model/AdventuresTableViewSection.swift; sourceTree = "<group>"; };
+		706553A11F09F3E800ABEFD0 /* AdventureTableViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdventureTableViewRow.swift; path = View/Adventures/model/AdventureTableViewRow.swift; sourceTree = "<group>"; };
+		706553A31F09F84D00ABEFD0 /* SegueIdentifable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIdentifable.swift; sourceTree = "<group>"; };
+		70A7BCBD1F08CA5A00BE3BDE /* TableViewKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TableViewKit.framework; path = Carthage/Build/iOS/TableViewKit.framework; sourceTree = "<group>"; };
+		70A7BCBE1F08CA5A00BE3BDE /* CBZSplashViewLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CBZSplashViewLib.framework; path = Carthage/Build/iOS/CBZSplashViewLib.framework; sourceTree = "<group>"; };
+		70A7BCBF1F08CA5A00BE3BDE /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Carthage/Build/iOS/MBProgressHUD.framework; sourceTree = "<group>"; };
+		70A7BCC21F08CB5100BE3BDE /* AdventuresTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdventuresTableViewModel.swift; path = View/Adventures/model/AdventuresTableViewModel.swift; sourceTree = "<group>"; };
+		70CE689D1F08C5600031FFEE /* AdventuresTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdventuresTableViewController.swift; path = View/AdventuresTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,21 +162,18 @@
 		121257261EC53A50000F1E26 /* TrackMe */ = {
 			isa = PBXGroup;
 			children = (
+				5A68252B0C85845C984D868E /* Extensions */,
+				5A682395D0FF9A61EB70E0A0 /* Layer */,
+				70F152811F0865610044FCAB /* Model */,
+				70F152801F0865180044FCAB /* Storyboards */,
+				5A6828E4253B8E089DDF8D0B /* StyleKit */,
 				12C7B1721ED50BDF006F7264 /* View */,
+				3ED4A32BBD3FF1282B6EBD68 /* AEConsole.plist */,
+				5A68226AB37E3CC6D99EF43C /* AELog.plist */,
 				121257271EC53A50000F1E26 /* AppDelegate.swift */,
 				1270C6FF1EC5459F00D1B92C /* AppDelegate+Logger.swift */,
 				1212572E1EC53A50000F1E26 /* Assets.xcassets */,
 				121257331EC53A50000F1E26 /* Info.plist */,
-				121257301EC53A50000F1E26 /* LaunchScreen.storyboard */,
-				1212572B1EC53A50000F1E26 /* Main.storyboard */,
-				121257291EC53A50000F1E26 /* ViewController.swift */,
-				3ED4AA18D503059EF55FF51F /* CLLocationCoordinate2D+Format.swift */,
-				5A6828E4253B8E089DDF8D0B /* StyleKit */,
-				5A682395D0FF9A61EB70E0A0 /* Layer */,
-				5A68252B0C85845C984D868E /* Extensions */,
-				5A68226AB37E3CC6D99EF43C /* AELog.plist */,
-				3ED4A32BBD3FF1282B6EBD68 /* AEConsole.plist */,
-				5A682C357BAD76103865D67C /* Trek.swift */,
 			);
 			path = TrackMe;
 			sourceTree = "<group>";
@@ -180,6 +190,9 @@
 		1270C6FE1EC5454200D1B92C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				70A7BCBE1F08CA5A00BE3BDE /* CBZSplashViewLib.framework */,
+				70A7BCBF1F08CA5A00BE3BDE /* MBProgressHUD.framework */,
+				70A7BCBD1F08CA5A00BE3BDE /* TableViewKit.framework */,
 				702484101EECDE8400EE4821 /* BetterSegmentedControl.framework */,
 				7003F63F1EE3DBD500BB01FD /* AEConsole.framework */,
 				7003F6401EE3DBD500BB01FD /* AELog.framework */,
@@ -195,6 +208,8 @@
 		12C7B1721ED50BDF006F7264 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				70A7BCC01F08CB1900BE3BDE /* Adventures */,
+				121257291EC53A50000F1E26 /* ViewController.swift */,
 				12C7B1731ED50BFC006F7264 /* CompassView.swift */,
 			);
 			name = View;
@@ -211,8 +226,10 @@
 		5A68252B0C85845C984D868E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3ED4AA18D503059EF55FF51F /* CLLocationCoordinate2D+Format.swift */,
 				5A682EBB87D4FE75908ACD6D /* Numbers.swift */,
 				5A68227A8FD873D1848A9BAE /* ColorUtilities.swift */,
+				706553A31F09F84D00ABEFD0 /* SegueIdentifable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -223,6 +240,42 @@
 				5A682ADAE9FB4C763E44AD87 /* TrackMe.swift */,
 			);
 			name = StyleKit;
+			sourceTree = "<group>";
+		};
+		70A7BCC01F08CB1900BE3BDE /* Adventures */ = {
+			isa = PBXGroup;
+			children = (
+				70A7BCC11F08CB2C00BE3BDE /* Model */,
+				70CE689D1F08C5600031FFEE /* AdventuresTableViewController.swift */,
+			);
+			name = Adventures;
+			sourceTree = "<group>";
+		};
+		70A7BCC11F08CB2C00BE3BDE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				70A7BCC21F08CB5100BE3BDE /* AdventuresTableViewModel.swift */,
+				7065539F1F09C32600ABEFD0 /* AdventuresTableViewSection.swift */,
+				706553A11F09F3E800ABEFD0 /* AdventureTableViewRow.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		70F152801F0865180044FCAB /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				1212572B1EC53A50000F1E26 /* Main.storyboard */,
+				121257301EC53A50000F1E26 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		70F152811F0865610044FCAB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5A682C357BAD76103865D67C /* Trek.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,12 +397,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				1270C7001EC5459F00D1B92C /* AppDelegate+Logger.swift in Sources */,
+				70A7BCC31F08CB5100BE3BDE /* AdventuresTableViewModel.swift in Sources */,
+				706553A01F09C32600ABEFD0 /* AdventuresTableViewSection.swift in Sources */,
 				1212572A1EC53A50000F1E26 /* ViewController.swift in Sources */,
 				121257281EC53A50000F1E26 /* AppDelegate.swift in Sources */,
 				3ED4A4CC780DE0794C8ED606 /* CLLocationCoordinate2D+Format.swift in Sources */,
 				5A68204145C839BD58C34044 /* TrackMe.swift in Sources */,
+				706553A21F09F3E800ABEFD0 /* AdventureTableViewRow.swift in Sources */,
 				12C7B1741ED50BFC006F7264 /* CompassView.swift in Sources */,
 				5A68237176ADCB475C8949E9 /* CompassLayer.swift in Sources */,
+				706553A41F09F84D00ABEFD0 /* SegueIdentifable.swift in Sources */,
+				70CE689E1F08C5600031FFEE /* AdventuresTableViewController.swift in Sources */,
 				5A6828A70EAE5BB1163C4B95 /* Numbers.swift in Sources */,
 				5A68243B2F7BFA3DEE0C91EB /* ColorUtilities.swift in Sources */,
 				5A682DE622D46B29FCF5BD86 /* Trek.swift in Sources */,
@@ -552,7 +610,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.kaizen.TrackMeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrackMe.app/TrackMe";
 			};
@@ -568,7 +626,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.kaizen.TrackMeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrackMe.app/TrackMe";
 			};
